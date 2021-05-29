@@ -14,7 +14,8 @@ class TriangleController extends Controller
      */
     public function index()
     {
-        //
+        $triangles = Triangle::all();
+        return $triangles;
     }
 
     /**
@@ -35,7 +36,17 @@ class TriangleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'base' => 'required',
+            'altura' => 'required'
+        ]);
+        $triangle = new Triangle();
+        $triangle->base = $request->get('base');
+        $triangle->height = $request->get('altura');
+        $triangle->area = (float) (($triangle->base * $triangle->height) / 2);
+        $triangle->perimeter = (float) ($triangle->base * 3);
+        $triangle->save();
+        return $triangle;
     }
 
     /**
@@ -67,9 +78,27 @@ class TriangleController extends Controller
      * @param  \App\Models\Triangle  $triangle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Triangle $triangle)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'base' => 'required',
+            'altura' => 'required'
+        ]);
+        $triangle = Triangle::find($id);
+        if ($triangle != null)
+        {
+            $triangle->base = $request->get('base');
+            $triangle->height = $request->get('altura');
+            $triangle->area = (float) ($triangle->base * $triangle->height) / 2;
+            $triangle->perimeter = (float) ($triangle->base * 3);
+            $triangle->save();
+            return $triangle;
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
+
     }
 
     /**
@@ -78,8 +107,18 @@ class TriangleController extends Controller
      * @param  \App\Models\Triangle  $triangle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Triangle $triangle)
+    public function destroy($id)
     {
-        //
+        $triangle = Triangle::find($id);
+        if ($triangle != null)
+        {
+            $triangle->delete();
+            return response('success');
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
+
     }
 }

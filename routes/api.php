@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CircleController;
+use App\Http\Controllers\RectangleController;
+use App\Http\Controllers\SquareController;
+use App\Http\Controllers\TriangleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FigureController;
@@ -23,17 +27,27 @@ use App\Http\Controllers\FigureController;
 Route::get('figures', [FigureController::class, 'index']);
 
 // square routes
-Route::get('square', [\App\Http\Controllers\SquareController::class, 'index']);
-Route::post('square', [\App\Http\Controllers\SquareController::class, 'store']);
-Route::get('square/{id}/show', [\App\Http\Controllers\SquareController::class,'show']);
-Route::put('square/{id}/update', [\App\Http\Controllers\SquareController::class, 'update']);
-Route::delete('square/{id}/delete', [\App\Http\Controllers\SquareController::class, 'destroy']);
+Route::get('square', [SquareController::class, 'index']);
+Route::post('square', [SquareController::class, 'store']);
+Route::put('square/{id}/update', [SquareController::class, 'update']);
+Route::delete('square/{id}/delete', [SquareController::class, 'destroy']);
 
 // triangle routes
-Route::get('triangle', [\App\Http\Controllers\TriangleController::class, 'index']);
+Route::get('triangle', [TriangleController::class, 'index']);
+Route::post('triangle', [TriangleController::class, 'store']);
+Route::put('triangle/{id}/update', [TriangleController::class, 'update']);
+Route::delete('triangle/{id}/delete', [TriangleController::class, 'destroy']);
+
 // circle routes
-Route::get('circle', [\App\Http\Controllers\CircleController::class, 'index']);
+Route::get('circle', [CircleController::class, 'index']);
+Route::post('circle', [CircleController::class, 'store']);
+Route::put('circle/{id}/update', [CircleController::class, 'update']);
+Route::delete('circle/{id}/delete', [CircleController::class, 'destroy']);
+
 // rectangle routes
-Route::get('rectangle', [\App\Http\Controllers\RectangleController::class, 'index']);
+Route::get('rectangle', [RectangleController::class, 'index']);
+Route::post('rectangle', [RectangleController::class, 'store']);
+Route::put('rectangle/{id}/update', [RectangleController::class, 'update']);
+Route::delete('rectangle/{id}/delete', [RectangleController::class, 'destroy']);
 
 

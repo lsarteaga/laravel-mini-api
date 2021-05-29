@@ -14,7 +14,8 @@ class RectangleController extends Controller
      */
     public function index()
     {
-        //
+        $rectangles = Rectangle::all();
+        return $rectangles;
     }
 
     /**
@@ -35,7 +36,17 @@ class RectangleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'lado1' => 'required',
+            'lado2' => 'required'
+        ]);
+        $rectangle = new Rectangle();
+        $rectangle->lenght = $request->get('lado1');
+        $rectangle->width = $request->get('lado2');
+        $rectangle->area = (float) ($rectangle->lenght * $rectangle->width);
+        $rectangle->perimeter = (float) ((2 * $rectangle->lenght) + (2 * $rectangle->width));
+        $rectangle->save();
+        return $rectangle;
     }
 
     /**
@@ -67,9 +78,26 @@ class RectangleController extends Controller
      * @param  \App\Models\Rectangle  $rectangle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rectangle $rectangle)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'lado1' => 'required',
+            'lado2' => 'required'
+        ]);
+        $rectangle = Rectangle::find($id);
+        if ($rectangle != null)
+        {
+            $rectangle->lenght = $request->get('lado1');
+            $rectangle->width = $request->get('lado2');
+            $rectangle->area = (float) ($rectangle->lenght * $rectangle->width);
+            $rectangle->perimeter = (float) ((2 * $rectangle->lenght) + (2 * $rectangle->width));
+            $rectangle->save();
+            return $rectangle;
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 
     /**
@@ -78,8 +106,17 @@ class RectangleController extends Controller
      * @param  \App\Models\Rectangle  $rectangle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rectangle $rectangle)
+    public function destroy($id)
     {
-        //
+        $rectangle = Rectangle::find($id);
+        if ($rectangle != null)
+        {
+            $rectangle->delete();
+            return response('success');
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 }

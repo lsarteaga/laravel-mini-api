@@ -36,6 +36,9 @@ class SquareController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+           'lado' => 'required'
+        ]);
         $square = new Square();
         $square->side = $request->get('lado');
         $square->area = (float) ($square->side * $square->side);
@@ -52,7 +55,7 @@ class SquareController extends Controller
      */
     public function show(Square $square)
     {
-        return $square;
+
     }
 
     /**
@@ -63,7 +66,7 @@ class SquareController extends Controller
      */
     public function edit(Square $square)
     {
-        return $square;
+
     }
 
     /**
@@ -73,14 +76,22 @@ class SquareController extends Controller
      * @param  \App\Models\Square  $square
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $square = Square::find($request->get('id'));
-        $square->side = $request->get('lado');
-        $square->area = (float) ($square->side * $square->side);
-        $square->perimeter = (float) 4 * $square->side;
-        $square->update();
-        return $square;
+        $request->validate(['lado' => 'required']);
+        $square = Square::find($id);
+        if ($square != null)
+        {
+            $square->side = $request->get('lado');
+            $square->area = (float) ($square->side * $square->side);
+            $square->perimeter = (float) 4 * $square->side;
+            $square->update();
+            return $square;
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 
     /**
@@ -89,10 +100,17 @@ class SquareController extends Controller
      * @param  \App\Models\Square  $square
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $square = Square::find($request->get('id'));
-        $square->delete();
-        return ['process' => 'ok'];
+        $square = Square::find($id);
+        if ($square != null)
+        {
+            $square->delete();
+            return response('success');
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 }

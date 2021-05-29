@@ -14,7 +14,8 @@ class CircleController extends Controller
      */
     public function index()
     {
-        //
+        $circles = Circle::all();
+        return $circles;
     }
 
     /**
@@ -35,7 +36,13 @@ class CircleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['radio' => 'required']);
+        $circle = new Circle();
+        $circle->radius = $request->get('radio');
+        $circle->area = (float) (pi() * pow($circle->radius, 2));
+        $circle->perimeter = (float) (2 * pi() * $circle->radius);
+        $circle->save();
+        return $circle;
     }
 
     /**
@@ -67,9 +74,22 @@ class CircleController extends Controller
      * @param  \App\Models\Circle  $circle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Circle $circle)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(['radio' => 'required']);
+        $circle = Circle::find($id);
+        if ($circle != null)
+        {
+            $circle->radius = $request->get('radio');
+            $circle->area = (float) (pi() * pow($circle->radius, 2));
+            $circle->perimeter = (float) (2 * pi() * $circle->radius);
+            $circle->save();
+            return $circle;
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 
     /**
@@ -78,8 +98,17 @@ class CircleController extends Controller
      * @param  \App\Models\Circle  $circle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Circle $circle)
+    public function destroy($id)
     {
-        //
+        $circle = Circle::find($id);
+        if ($circle != null)
+        {
+            $circle->delete();
+            return response('success');
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 }
