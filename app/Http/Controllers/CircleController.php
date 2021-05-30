@@ -51,9 +51,17 @@ class CircleController extends Controller
      * @param  \App\Models\Circle  $circle
      * @return \Illuminate\Http\Response
      */
-    public function show(Circle $circle)
+    public function show($id)
     {
-        //
+        $circle = Circle::find($id);
+        if ($circle != null)
+        {
+            return $circle;
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 
     /**

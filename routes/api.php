@@ -31,23 +31,26 @@ Route::get('square', [SquareController::class, 'index']);
 Route::post('square', [SquareController::class, 'store']);
 Route::put('square/{id}/update', [SquareController::class, 'update']);
 Route::delete('square/{id}/delete', [SquareController::class, 'destroy']);
+Route::get('square/{id}/show', [SquareController::class, 'show']);
 
 // triangle routes
 Route::get('triangle', [TriangleController::class, 'index']);
 Route::post('triangle', [TriangleController::class, 'store']);
 Route::put('triangle/{id}/update', [TriangleController::class, 'update']);
 Route::delete('triangle/{id}/delete', [TriangleController::class, 'destroy']);
+Route::get('triangle/{id}/show', [TriangleController::class, 'show']);
 
 // circle routes
 Route::get('circle', [CircleController::class, 'index']);
 Route::post('circle', [CircleController::class, 'store']);
 Route::put('circle/{id}/update', [CircleController::class, 'update']);
 Route::delete('circle/{id}/delete', [CircleController::class, 'destroy']);
+Route::get('circle/{id}/show', [CircleController::class, 'show']);
 
 // rectangle routes
 Route::get('rectangle', [RectangleController::class, 'index']);
 Route::post('rectangle', [RectangleController::class, 'store']);
 Route::put('rectangle/{id}/update', [RectangleController::class, 'update']);
 Route::delete('rectangle/{id}/delete', [RectangleController::class, 'destroy']);
-
+Route::get('rectangle/{id}/show', [RectangleController::class, 'show']);
 

@@ -55,9 +55,17 @@ class RectangleController extends Controller
      * @param  \App\Models\Rectangle  $rectangle
      * @return \Illuminate\Http\Response
      */
-    public function show(Rectangle $rectangle)
+    public function show($id)
     {
-        //
+        $rectangle = Rectangle::find($id);
+        if ($rectangle != null)
+        {
+            return $rectangle;
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 
     /**

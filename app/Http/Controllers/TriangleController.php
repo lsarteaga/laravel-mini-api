@@ -55,9 +55,17 @@ class TriangleController extends Controller
      * @param  \App\Models\Triangle  $triangle
      * @return \Illuminate\Http\Response
      */
-    public function show(Triangle $triangle)
+    public function show($id)
     {
-        //
+        $triangle = Triangle::find($id);
+        if ($triangle != null)
+        {
+            return $triangle;
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 
     /**

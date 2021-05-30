@@ -53,9 +53,17 @@ class SquareController extends Controller
      * @param  \App\Models\Square  $square
      * @return \Illuminate\Http\Response
      */
-    public function show(Square $square)
+    public function show($id)
     {
-
+        $square = Square::find($id);
+        if ($square != null)
+        {
+            return $square;
+        }
+        else
+        {
+            return response('no record found with id: ' . $id);
+        }
     }
 
     /**
