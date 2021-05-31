@@ -15,10 +15,10 @@ class CreateTrianglesTable extends Migration
     {
         Schema::create('triangles', function (Blueprint $table) {
             $table->id();
-            $table->float('base', 4, 2);
-            $table->float('height', 4,2);
-            $table->float('area', 4,2);
-            $table->float('perimeter', 4,2);
+            $table->float('base', 8, 2);
+            $table->float('height', 8,2);
+            $table->float('area', 8,2);
+            $table->float('perimeter', 8,2);
             $table->timestamps();
         });
     }

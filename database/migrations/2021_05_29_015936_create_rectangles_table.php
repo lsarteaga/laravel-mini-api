@@ -15,10 +15,10 @@ class CreateRectanglesTable extends Migration
     {
         Schema::create('rectangles', function (Blueprint $table) {
             $table->id();
-            $table->float('width', 4,2);
-            $table->float('lenght', 4,2);
-            $table->float('area', 4,2);
-            $table->float('perimeter', 4,2);
+            $table->float('width', 8,2);
+            $table->float('lenght', 8,2);
+            $table->float('area', 8,2);
+            $table->float('perimeter', 8,2);
             $table->timestamps();
         });
     }

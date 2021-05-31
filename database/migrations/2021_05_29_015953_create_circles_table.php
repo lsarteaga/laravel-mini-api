@@ -15,9 +15,9 @@ class CreateCirclesTable extends Migration
     {
         Schema::create('circles', function (Blueprint $table) {
             $table->id();
-            $table->float('radius', 4,2);
-            $table->float('area', 4,2);
-            $table->float('perimeter', 4,2);
+            $table->float('radius', 8,2);
+            $table->float('area', 8,2);
+            $table->float('perimeter', 8,2);
             $table->timestamps();
         });
     }

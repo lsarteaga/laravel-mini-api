@@ -15,9 +15,9 @@ class CreateSquaresTable extends Migration
     {
         Schema::create('squares', function (Blueprint $table) {
             $table->id();
-            $table->float('side', 4,2);
-            $table->float('area', 4,2);
-            $table->float('perimeter', 4,2);
+            $table->float('side', 8,2);
+            $table->float('area', 8,2);
+            $table->float('perimeter', 8,2);
             $table->timestamps();
         });
     }
